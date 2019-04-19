@@ -51,3 +51,8 @@ fi
 alias 'update'='sudo apt update; sudo apt -y dist-upgrade; sudo apt -y autoremove'
 alias ssh-tor='ssh -o "ProxyCommand nc -X 5 -x 127.0.0.1:9050 %h %p"'
 
+# Hosts alias
+if [ -f "$HOME/bashrc/bash_alias_local" ] ; then
+     source "$HOME/bashrc/bash_alias_local"
+fi
+
