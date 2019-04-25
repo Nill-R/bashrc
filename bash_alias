@@ -48,10 +48,21 @@ if [ "$TERM" != dumb ] && [ -n "$GRC" ]; then
     alias ifconfig='colourify ifconfig'
     alias ip='colourify ip'
 fi
-alias 'update'='sudo apt update; sudo apt -y dist-upgrade; sudo apt -y autoremove'
+# alias 'update'='sudo apt update; sudo apt -y dist-upgrade; sudo apt -y autoremove'
+
+if [ ! -z "$(which apt)" ]; then
+  alias update="sudo apt update && sudo apt -y dist-upgrade; sudo apt -y autoremove"
+elif [ ! -z "$(which apt-get)" ]; then
+  alias update ="sudo apt-get update && sudo apt-get -y dist-upgrade; sudo apt-get -y autoremove"
+elif [ ! -z "$(which dnf)" ]; then
+  alias update="sudo dnf -y upgrade"
+elif [ ! -z "$(which yum)" ]; then
+  alias update="sudo yum -y update"
+fi
+
 alias ssh-tor='ssh -o "ProxyCommand nc -X 5 -x 127.0.0.1:9050 %h %p"'
 
-# Hosts alias
+# Hosts aliases
 if [ -f "$HOME/bashrc/bash_alias_local" ] ; then
      source "$HOME/bashrc/bash_alias_local"
 fi
